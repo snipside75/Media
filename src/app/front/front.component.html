@@ -1,0 +1,7 @@
+<h3>Front</h3>
+<ul>
+  <li *ngFor="let image of images" (click)="setClickedMedia(image.file_id)">
+    <img [alt]="image.title" [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + (image.filename | thumbnail: 'large')" >
+  </li>
+</ul>
+

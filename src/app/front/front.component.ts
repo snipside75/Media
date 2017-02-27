@@ -1,0 +1,37 @@
+import { Component, OnInit } from '@angular/core';
+import { LoginService } from "../services/login.service";
+import { Router } from "@angular/router";
+import { MediaService } from "../services/media.service";
+
+@Component({
+  selector: 'app-front',
+  templateUrl: './front.component.html',
+  styleUrls: ['./front.component.scss']
+})
+export class FrontComponent implements OnInit {
+
+  private images: any = [];
+  private clickedMedia: any = {};
+
+  constructor(private loginService: LoginService, private router: Router, private mediaService: MediaService) { }
+
+  ngOnInit() {
+    if (!this.loginService.logged)
+      this.router.navigate(['login']);
+
+    this.mediaService.getMedia().subscribe(
+      res => {
+        this.images = res;
+      }
+    );
+  }
+
+  setClickedMedia = (id: number) => {
+    // this.mediaService.getMediaByID(id).subscribe(res => {
+    //     this.clickedMedia = res;
+    //   }
+    // );
+    console.log(id);
+    this.router.navigate(['/player', id]);
+  }
+}

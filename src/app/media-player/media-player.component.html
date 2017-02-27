@@ -1,0 +1,19 @@
+<h2>{{ clickedMedia.title }}</h2>
+
+<audio controls *ngIf='clickedMedia.media_type === "audio"'>
+  <source [src]="'http://media.mw.metropolia.fi/wbma/uploads/'+clickedMedia.filename">
+</audio>
+<video *ngIf='clickedMedia.media_type === "video"' controls>
+  <source  [src]="'http://media.mw.metropolia.fi/wbma/uploads/'+clickedMedia.filename">
+   <!-- poster=http://media.mw.metropolia.fi/wbma/uploads/{{thumbnailPipe.transform(clickedMedia.filename, 'large')}} -->
+</video>
+<img *ngIf='clickedMedia.media_type === "image"' [src]="'http://media.mw.metropolia.fi/wbma/uploads/'+clickedMedia.filename">
+
+<ul>
+  <li>Username: {{ clickedMedia.username }}</li>
+  <li>Description: {{ clickedMedia.description }}</li> 
+  <li>Date added: {{ clickedMedia.time_added }}</li>
+</ul>
+
+<h3 *ngIf="hasLiked">You liked this</h3>
+<button (click)="setlike()">{{ hasLiked ? 'Unlike' : 'Like' }}</button>
